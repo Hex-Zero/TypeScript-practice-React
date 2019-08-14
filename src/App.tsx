@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useContext } from 'react'
+import { Link } from '@reach/router'
+import './App.css'
+import { Store } from './Store'
+import { IEpisode, IAction, IEpisodeProps } from './interfaces'
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// import Reducer from './components/Reducer'
+// import TodoList from './components/TodoList'
+// import Context, { Parent } from './components/Context'
+
+export default function App(props: any): JSX.Element {
+	const { state, dispatch } = useContext(Store)
+
+	console.log(state)
+	return (
+		<Fragment>
+			<header className='header'>
+				<h1> Rick and Morty</h1>
+				<p>Pick your favourite episode!!!</p>
+				<Link to='/'>Home</Link>
+				<Link to='/faves'>Favourites(s): {state.favourites.length}</Link>
+			</header>
+			{props.children}
+			{/* <Parent>
+				<Context />
+			</Parent>
+      <TodoList /> 
+       <Reducer /> */}
+		</Fragment>
+	)
 }
-
-export default App;
